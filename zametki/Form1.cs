@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace zametki
 {
@@ -19,7 +21,49 @@ namespace zametki
         public Form1()
         {
             InitializeComponent();
+
+            button5.Click += button5_Click;
+            button6.Click += button6_Click;
+            openFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
+            saveFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
+
         }
+
+
+
+        void button6_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
+                return;
+            // получаем выбранный файл
+            string filename = saveFileDialog1.FileName;
+            // сохраняем текст в файл
+            System.IO.File.WriteAllText(filename, txtTextzametki.Text);
+            MessageBox.Show("Файл сохранен");
+        }
+        // открытие файла
+        void button5_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
+                return;
+            // получаем выбранный файл
+            string filename = openFileDialog1.FileName;
+            // читаем файл в строку
+            string fileText = System.IO.File.ReadAllText(filename);
+            txtTextzametki.Text = fileText;
+            MessageBox.Show("Файл открыт");
+        }
+
+
+
+
+
+
+
+
+
+
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -29,6 +73,8 @@ namespace zametki
             dataGridView1.DataSource = table;
             dataGridView1.Columns["Текст заметки"].Visible = false;
             dataGridView1.Columns["Заглавие"].Width = 172;
+
+
 
         }
 
@@ -65,5 +111,25 @@ namespace zametki
             int index = dataGridView1.CurrentCell.RowIndex;
             table.Rows[index].Delete();
         }
+
+     
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+          
+        }
+
+        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            
+        }
+
+       
+    
+
+   
+        
+
+       
     }
 }
