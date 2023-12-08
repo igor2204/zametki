@@ -143,20 +143,20 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(341, 29);
+            this.button5.Location = new System.Drawing.Point(69, 292);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.Size = new System.Drawing.Size(104, 23);
             this.button5.TabIndex = 9;
-            this.button5.Text = "button5";
+            this.button5.Text = "Открыть файл";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(448, 29);
+            this.button6.Location = new System.Drawing.Point(306, 292);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.Size = new System.Drawing.Size(113, 23);
             this.button6.TabIndex = 10;
-            this.button6.Text = "button6";
+            this.button6.Text = "Сохранить в файл";
             this.button6.UseVisualStyleBackColor = true;
             // 
             // Form1

@@ -37,9 +37,17 @@ namespace zametki
                 return;
             // получаем выбранный файл
             string filename = saveFileDialog1.FileName;
-            // сохраняем текст в файл
-            System.IO.File.WriteAllText(filename, txtTextzametki.Text);
-            MessageBox.Show("Файл сохранен");
+
+            try
+            {
+                // пытаемся сохранить текст в файл
+                System.IO.File.WriteAllText(filename, txtTextzametki.Text);
+                MessageBox.Show("Файл сохранен");
+            }
+            catch (Exception ex) when (ex is UnauthorizedAccessException || ex is IOException || ex is ArgumentException || ex is DirectoryNotFoundException || ex is PathTooLongException || ex is NotSupportedException)
+            {
+                MessageBox.Show("Невозможно сохранить файл. Пожалуйста, проверьте правильность выбранного файла и доступ к папке.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         // открытие файла
         void button5_Click(object sender, EventArgs e)
@@ -48,19 +56,19 @@ namespace zametki
                 return;
             // получаем выбранный файл
             string filename = openFileDialog1.FileName;
-            // читаем файл в строку
-            string fileText = System.IO.File.ReadAllText(filename);
-            txtTextzametki.Text = fileText;
-            MessageBox.Show("Файл открыт");
+
+            try
+            {
+                // пытаемся прочитать файл в строку
+                string fileText = System.IO.File.ReadAllText(filename);
+                txtTextzametki.Text = fileText;
+                MessageBox.Show("Файл открыт");
+            }
+            catch (Exception ex) when (ex is UnauthorizedAccessException || ex is IOException || ex is NotSupportedException)
+            {
+                MessageBox.Show("Невозможно открыть выбранный файл. Убедитесь, что выбранный файл является текстовым файлом.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-
-
-
-
-
-
-
-
 
 
 
@@ -124,12 +132,6 @@ namespace zametki
             
         }
 
-       
-    
-
-   
-        
-
-       
+  
     }
 }
